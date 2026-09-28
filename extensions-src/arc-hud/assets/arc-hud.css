@@ -1,0 +1,422 @@
+/* ── Arc HUD: Composer Footer Sci-Fi HUD Visual Treatment ───────────────
+   Scoped entirely to [data-skin="arc-hud"] so it takes effect only when the
+   Arc HUD skin is selected. Supports both Light and Dark themes.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── Light Variant (legible, cooler technical contrast on bright surfaces) */
+:root[data-skin="arc-hud"] {
+  --accent: #008b9e;
+  --accent-hover: #007282;
+  --accent-text: #007282;
+  --accent-contrast: #ffffff;
+  --accent-bg: rgba(217, 119, 6, 0.10);
+  --accent-bg-strong: rgba(217, 119, 6, 0.20);
+  --accent-rgb: 0, 139, 158;
+  --accent2: #d97706;
+  --accent3: #0284c7;
+  --link: #008b9e;
+
+  /* Arc HUD design tokens for Light mode */
+  --arc-hud-primary: #008b9e;
+  --arc-hud-secondary: #d97706;
+  --arc-hud-border: rgba(0, 139, 158, 0.40);
+  --arc-hud-border-hover: rgba(0, 139, 158, 0.85);
+  --arc-hud-glow: rgba(0, 139, 158, 0.18);
+  --arc-hud-glow-strong: rgba(0, 139, 158, 0.40);
+  --arc-hud-bracket: #d97706;
+  --arc-hud-bracket-glow: rgba(217, 119, 6, 0.35);
+  --arc-hud-chip-bg: rgba(0, 139, 158, 0.05);
+  --arc-hud-chip-bg-hover: rgba(0, 139, 158, 0.12);
+  --arc-hud-scanline: rgba(0, 139, 158, 0.025);
+  --arc-hud-box-bg: rgba(254, 252, 247, 0.96);
+  --arc-hud-send-gradient: radial-gradient(circle at center, #ffffff 0%, #00a4ba 38%, #00788a 72%, #004d59 100%);
+  --arc-hud-send-text: #ffffff;
+}
+
+/* ── Dark Variant (vivid Iron-Man / sci-fi neon reactor aesthetic) ─────── */
+:root.dark[data-skin="arc-hud"] {
+  --accent: #00f0ff;
+  --accent-hover: #38f5ff;
+  --accent-text: #00f0ff;
+  --accent-contrast: #030712;
+  --accent-bg: rgba(255, 183, 0, 0.10);
+  --accent-bg-strong: rgba(255, 183, 0, 0.20);
+  --accent-rgb: 0, 240, 255;
+  --accent2: #ffb700;
+  --accent3: #00d4e0;
+  --link: #00f0ff;
+
+  /* Arc HUD design tokens for Dark mode */
+  --arc-hud-primary: #00f0ff;
+  --arc-hud-secondary: #ffb700;
+  --arc-hud-border: rgba(0, 240, 255, 0.45);
+  --arc-hud-border-hover: rgba(0, 240, 255, 0.90);
+  --arc-hud-glow: rgba(0, 240, 255, 0.22);
+  --arc-hud-glow-strong: rgba(0, 240, 255, 0.55);
+  --arc-hud-bracket: #ffb700;
+  --arc-hud-bracket-glow: rgba(255, 183, 0, 0.55);
+  --arc-hud-chip-bg: rgba(0, 240, 255, 0.04);
+  --arc-hud-chip-bg-hover: rgba(0, 240, 255, 0.12);
+  --arc-hud-scanline: rgba(0, 240, 255, 0.035);
+  --arc-hud-box-bg: rgba(13, 13, 26, 0.92);
+  --arc-hud-send-gradient: radial-gradient(circle at center, #ffffff 0%, #00f0ff 38%, #008899 74%, #00363d 100%);
+  --arc-hud-send-text: #030712;
+}
+
+/* ── HUD Typography on Scoped Selectors ─────────────────────────────────── */
+:root[data-skin="arc-hud"] .composer-footer {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+:root[data-skin="arc-hud"] .composer-profile-chip,
+:root[data-skin="arc-hud"] .composer-workspace-chip,
+:root[data-skin="arc-hud"] .composer-model-chip,
+:root[data-skin="arc-hud"] .composer-reasoning-chip,
+:root[data-skin="arc-hud"] .composer-toolsets-chip,
+:root[data-skin="arc-hud"] .provider-quota-chip,
+:root[data-skin="arc-hud"] .composer-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* ── Composer Box HUD Container & Scanline Overlay ──────────────────────── */
+:root[data-skin="arc-hud"] .composer-box {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--arc-hud-border);
+  box-shadow: 0 0 12px var(--arc-hud-glow), inset 0 0 10px rgba(0, 240, 255, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+:root[data-skin="arc-hud"] .composer-box:focus-within {
+  border-color: var(--arc-hud-border-hover);
+  box-shadow: 0 0 18px var(--arc-hud-glow-strong), inset 0 0 12px rgba(0, 240, 255, 0.05);
+}
+
+/* Subtle animated scanline overlay: low opacity keeps text legible */
+:root[data-skin="arc-hud"] .composer-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 3px,
+    var(--arc-hud-scanline) 3px,
+    var(--arc-hud-scanline) 4px
+  );
+  background-size: 100% 8px;
+  pointer-events: none;
+  z-index: 1;
+  animation: arc-hud-scanlines 10s linear infinite;
+}
+
+@keyframes arc-hud-scanlines {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 64px;
+  }
+}
+
+/* Keep interactive content above scanline layer */
+:root[data-skin="arc-hud"] textarea#msg,
+:root[data-skin="arc-hud"] .composer-footer,
+:root[data-skin="arc-hud"] .attach-tray,
+:root[data-skin="arc-hud"] .cmd-dropdown {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Composer Footer Divider & Icon Controls ────────────────────────────── */
+:root[data-skin="arc-hud"] .composer-divider {
+  background: var(--arc-hud-border);
+  box-shadow: 0 0 4px var(--arc-hud-glow);
+}
+
+:root[data-skin="arc-hud"] .composer-left .icon-btn {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.18s ease;
+}
+
+:root[data-skin="arc-hud"] .composer-left .icon-btn:hover {
+  border-color: var(--arc-hud-border);
+  background: var(--arc-hud-chip-bg-hover);
+  color: var(--arc-hud-primary);
+  box-shadow: 0 0 8px var(--arc-hud-glow);
+}
+
+/* ── Composer Footer Chips: Hairline Borders & Corner-Bracket Accents ───── */
+/* Target all composer footer chips */
+:root[data-skin="arc-hud"] .composer-profile-chip,
+:root[data-skin="arc-hud"] .composer-model-chip,
+:root[data-skin="arc-hud"] .composer-reasoning-chip,
+:root[data-skin="arc-hud"] .composer-toolsets-chip,
+:root[data-skin="arc-hud"] .provider-quota-chip,
+:root[data-skin="arc-hud"] .composer-workspace-group {
+  position: relative;
+  border-radius: 4px;
+  border: 1px solid var(--arc-hud-border);
+  background: var(--arc-hud-chip-bg);
+  box-shadow: 0 0 6px var(--arc-hud-glow);
+  color: var(--text);
+  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Workspace group internal buttons */
+:root[data-skin="arc-hud"] .composer-workspace-files-btn {
+  border-radius: 3px 0 0 3px;
+  border-right: 1px solid var(--arc-hud-border);
+  transition: all 0.18s ease;
+}
+
+:root[data-skin="arc-hud"] .composer-workspace-chip {
+  border-radius: 0 3px 3px 0;
+  transition: all 0.18s ease;
+}
+
+:root[data-skin="arc-hud"] .composer-workspace-group:hover .composer-workspace-files-btn,
+:root[data-skin="arc-hud"] .composer-workspace-group:hover .composer-workspace-chip {
+  color: var(--arc-hud-primary);
+}
+
+/* Corner-bracket accents: small CSS-drawn angle brackets on corners */
+:root[data-skin="arc-hud"] .composer-profile-chip::before,
+:root[data-skin="arc-hud"] .composer-model-chip::before,
+:root[data-skin="arc-hud"] .composer-reasoning-chip::before,
+:root[data-skin="arc-hud"] .composer-toolsets-chip::before,
+:root[data-skin="arc-hud"] .provider-quota-chip::before,
+:root[data-skin="arc-hud"] .composer-workspace-group::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 5px;
+  height: 5px;
+  border-top: 1.5px solid var(--arc-hud-bracket);
+  border-left: 1.5px solid var(--arc-hud-bracket);
+  pointer-events: none;
+  transition: border-color 0.18s ease, filter 0.18s ease;
+}
+
+:root[data-skin="arc-hud"] .composer-profile-chip::after,
+:root[data-skin="arc-hud"] .composer-model-chip::after,
+:root[data-skin="arc-hud"] .composer-reasoning-chip::after,
+:root[data-skin="arc-hud"] .composer-toolsets-chip::after,
+:root[data-skin="arc-hud"] .provider-quota-chip::after,
+:root[data-skin="arc-hud"] .composer-workspace-group::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 5px;
+  height: 5px;
+  border-bottom: 1.5px solid var(--arc-hud-bracket);
+  border-right: 1.5px solid var(--arc-hud-bracket);
+  pointer-events: none;
+  transition: border-color 0.18s ease, filter 0.18s ease;
+}
+
+/* Hover and active states for chips */
+:root[data-skin="arc-hud"] .composer-profile-chip:hover,
+:root[data-skin="arc-hud"] .composer-profile-chip.active,
+:root[data-skin="arc-hud"] .composer-model-chip:hover,
+:root[data-skin="arc-hud"] .composer-model-chip.active,
+:root[data-skin="arc-hud"] .composer-reasoning-chip:hover,
+:root[data-skin="arc-hud"] .composer-reasoning-chip.active,
+:root[data-skin="arc-hud"] .composer-toolsets-chip:hover,
+:root[data-skin="arc-hud"] .composer-toolsets-chip.active,
+:root[data-skin="arc-hud"] .provider-quota-chip:hover,
+:root[data-skin="arc-hud"] .composer-workspace-group:hover {
+  border-color: var(--arc-hud-border-hover);
+  background: var(--arc-hud-chip-bg-hover);
+  box-shadow: 0 0 10px var(--arc-hud-glow-strong), inset 0 0 6px var(--arc-hud-glow);
+  color: var(--arc-hud-primary);
+}
+
+:root[data-skin="arc-hud"] .composer-profile-chip:hover::before,
+:root[data-skin="arc-hud"] .composer-profile-chip:hover::after,
+:root[data-skin="arc-hud"] .composer-model-chip:hover::before,
+:root[data-skin="arc-hud"] .composer-model-chip:hover::after,
+:root[data-skin="arc-hud"] .composer-reasoning-chip:hover::before,
+:root[data-skin="arc-hud"] .composer-reasoning-chip:hover::after,
+:root[data-skin="arc-hud"] .composer-toolsets-chip:hover::before,
+:root[data-skin="arc-hud"] .composer-toolsets-chip:hover::after,
+:root[data-skin="arc-hud"] .provider-quota-chip:hover::before,
+:root[data-skin="arc-hud"] .provider-quota-chip:hover::after,
+:root[data-skin="arc-hud"] .composer-workspace-group:hover::before,
+:root[data-skin="arc-hud"] .composer-workspace-group:hover::after {
+  filter: drop-shadow(0 0 4px var(--arc-hud-bracket-glow));
+}
+
+/* ── Context Ring HUD Glow ─────────────────────────────────────────────── */
+:root[data-skin="arc-hud"] .ctx-indicator {
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+:root[data-skin="arc-hud"] .ctx-ring {
+  filter: drop-shadow(0 0 4px var(--arc-hud-primary)) drop-shadow(0 0 8px var(--arc-hud-glow));
+  transition: filter 0.18s ease;
+}
+
+:root[data-skin="arc-hud"] .ctx-indicator:hover .ctx-ring,
+:root[data-skin="arc-hud"] .ctx-indicator:focus-visible .ctx-ring {
+  filter: drop-shadow(0 0 6px var(--arc-hud-primary)) drop-shadow(0 0 14px var(--arc-hud-glow-strong));
+}
+
+:root[data-skin="arc-hud"] .ctx-ring-track {
+  stroke: rgba(0, 240, 255, 0.16);
+}
+
+:root[data-skin="arc-hud"] .ctx-ring-value {
+  stroke: var(--arc-hud-primary);
+  filter: drop-shadow(0 0 2px var(--arc-hud-primary));
+}
+
+:root[data-skin="arc-hud"] .ctx-ring-center {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--arc-hud-primary);
+  text-shadow: 0 0 4px var(--arc-hud-glow-strong);
+  background: transparent;
+}
+
+/* ── Arc Reactor Send Button ────────────────────────────────────────────── */
+:root[data-skin="arc-hud"] .send-btn {
+  position: relative;
+  background: var(--arc-hud-send-gradient);
+  border: 1.5px solid var(--arc-hud-primary);
+  color: var(--arc-hud-send-text);
+  box-shadow: 0 0 8px var(--arc-hud-glow-strong), inset 0 0 6px rgba(255, 255, 255, 0.85);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+
+:root[data-skin="arc-hud"] .send-btn svg {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+}
+
+/* Arc reactor pulse glow on hover and focus-visible */
+:root[data-skin="arc-hud"] .send-btn:not(:disabled):hover,
+:root[data-skin="arc-hud"] .send-btn:not(:disabled):focus-visible {
+  outline: none;
+  animation: arc-reactor-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes arc-reactor-pulse {
+  0% {
+    box-shadow:
+      0 0 8px var(--arc-hud-primary),
+      0 0 16px var(--arc-hud-glow-strong),
+      inset 0 0 6px #ffffff;
+    filter: brightness(1.05);
+  }
+  50% {
+    box-shadow:
+      0 0 14px var(--arc-hud-primary),
+      0 0 26px var(--arc-hud-glow-strong),
+      0 0 38px var(--arc-hud-glow),
+      inset 0 0 10px #ffffff;
+    filter: brightness(1.22);
+  }
+  100% {
+    box-shadow:
+      0 0 8px var(--arc-hud-primary),
+      0 0 16px var(--arc-hud-glow-strong),
+      inset 0 0 6px #ffffff;
+    filter: brightness(1.05);
+  }
+}
+
+/* Send firing burst pulse triggered on message submission */
+:root[data-skin="arc-hud"] .send-btn.arc-hud-pulse {
+  animation: arc-reactor-fire 0.45s ease-out;
+}
+
+@keyframes arc-reactor-fire {
+  0% {
+    box-shadow: 0 0 0 0 var(--arc-hud-primary), inset 0 0 12px #ffffff;
+    transform: scale(0.96);
+  }
+  50% {
+    box-shadow: 0 0 24px 8px var(--arc-hud-primary), 0 0 40px 16px var(--arc-hud-secondary), inset 0 0 16px #ffffff;
+    transform: scale(1.08);
+  }
+  100% {
+    box-shadow: 0 0 8px var(--arc-hud-glow-strong), inset 0 0 6px rgba(255, 255, 255, 0.85);
+    transform: scale(1);
+  }
+}
+
+/* Disabled send button posture */
+:root[data-skin="arc-hud"] .send-btn:disabled {
+  opacity: 0.35;
+  filter: grayscale(0.6);
+  box-shadow: none;
+  border-color: rgba(255, 255, 255, 0.2);
+  animation: none;
+}
+
+/* Active stop / interrupt button styling */
+:root[data-skin="arc-hud"] .send-btn.stop,
+:root[data-skin="arc-hud"] .send-btn.interrupt {
+  background: radial-gradient(circle at center, #ffffff 0%, var(--error, #ef4444) 40%, #991b1b 100%);
+  border-color: var(--error, #ef4444);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.6), inset 0 0 6px #ffffff;
+}
+
+/* Steer button styling */
+:root[data-skin="arc-hud"] .send-btn.steer {
+  background: radial-gradient(circle at center, #ffffff 0%, #8b5cf6 40%, #5b21b6 100%);
+  border-color: #8b5cf6;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.6), inset 0 0 6px #ffffff;
+}
+
+/* ── Mobile and Responsive Support ──────────────────────────────────────── */
+:root[data-skin="arc-hud"] .composer-mobile-config-btn {
+  border-radius: 4px;
+  border: 1px solid var(--arc-hud-border);
+  background: var(--arc-hud-chip-bg);
+  box-shadow: 0 0 6px var(--arc-hud-glow);
+}
+
+:root[data-skin="arc-hud"] #composerMobileCtxRing {
+  filter: drop-shadow(0 0 4px var(--arc-hud-primary));
+}
+
+:root[data-skin="arc-hud"] .composer-mobile-config-panel {
+  border-color: var(--arc-hud-border);
+  box-shadow: 0 -6px 28px rgba(0, 0, 0, 0.5), 0 0 12px var(--arc-hud-glow);
+}
+
+:root[data-skin="arc-hud"] .composer-mobile-config-action {
+  border-radius: 4px;
+  border: 1px solid var(--arc-hud-border);
+  font-family: var(--font-mono);
+}
+
+/* ── Accessibility: Prefers Reduced Motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-skin="arc-hud"] .composer-box::before {
+    animation: none;
+  }
+
+  :root[data-skin="arc-hud"] .send-btn:not(:disabled):hover,
+  :root[data-skin="arc-hud"] .send-btn:not(:disabled):focus-visible {
+    animation: none;
+    box-shadow:
+      0 0 12px var(--arc-hud-primary),
+      0 0 20px var(--arc-hud-glow-strong),
+      inset 0 0 8px #ffffff;
+  }
+
+  :root[data-skin="arc-hud"] .send-btn.arc-hud-pulse {
+    animation: none;
+  }
+}

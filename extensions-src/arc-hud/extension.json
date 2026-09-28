@@ -1,0 +1,48 @@
+{
+  "id": "arc-hud",
+  "name": "Arc HUD",
+  "description": "An Iron-Man / sci-fi HUD visual treatment for the composer footer with glowing hairline borders, corner brackets, scanlines, and an arc-reactor send glow. Registers into the native Settings → Appearance skin picker.",
+  "version": "0.1.0",
+  "author": "arc-hud-team",
+  "assets": {
+    "scripts": [
+      "assets/arc-hud.js"
+    ],
+    "stylesheets": [
+      "assets/arc-hud.css"
+    ]
+  },
+  "capabilities": [
+    "manifest-bundle"
+  ],
+  "lifecycle": {
+    "webui_restart_required": false,
+    "sidecar_start_required": false,
+    "native_host_start_required": false,
+    "native_host_autostart": "none"
+  },
+  "screenshots": [],
+  "permissions": {
+    "webui_api": {
+      "read": [],
+      "write": []
+    },
+    "webui_navigation": false,
+    "dom": {
+      "owned": false,
+      "mutates_core_views": false
+    },
+    "storage": {
+      "owned": [],
+      "shared_webui_keys": []
+    },
+    "loopback_sidecar": false,
+    "native_host": false,
+    "filesystem": {
+      "arbitrary": false,
+      "serves_bundled_assets": true
+    },
+    "network_external": false,
+    "registers_skin": true
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "extensions": [
+    {
+      "id": "arc-hud",
+      "name": "Arc HUD",
+      "description": "Iron-Man / sci-fi HUD visual treatment for the composer footer.",
+      "scripts": [
+        "assets/arc-hud.js"
+      ],
+      "stylesheets": [
+        "assets/arc-hud.css"
+      ]
+    }
+  ]
+}
