@@ -1,8 +1,8 @@
 {
   "id": "arc-hud",
   "name": "Arc HUD",
-  "description": "An Iron-Man / sci-fi HUD visual treatment for the composer footer with glowing hairline borders, corner brackets, scanlines, and an arc-reactor send glow. Registers into the native Settings → Appearance skin picker.",
-  "version": "0.1.0",
+  "description": "An Iron-Man / sci-fi HUD visual treatment with an interactive full-screen HUD overlay, central Arc Reactor, corner telemetry panels, and functional tactical controls.",
+  "version": "0.2.0",
   "author": "arc-hud-team",
   "assets": {
     "scripts": [
@@ -24,13 +24,19 @@
   "screenshots": [],
   "permissions": {
     "webui_api": {
-      "read": [],
+      "read": [
+        "/api/dashboard/status",
+        "/api/usage",
+        "/api/sessions",
+        "/api/system/health",
+        "/api/sessions/events"
+      ],
       "write": []
     },
     "webui_navigation": false,
     "dom": {
-      "owned": false,
-      "mutates_core_views": false
+      "owned": true,
+      "mutates_core_views": true
     },
     "storage": {
       "owned": [],

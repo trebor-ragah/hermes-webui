@@ -1,206 +1,860 @@
-/* ── Arc HUD: Composer Footer Sci-Fi HUD Visual Treatment ───────────────
+/* ── Arc HUD: Full Interactive Sci-Fi HUD Overlay & Visual Treatment ────────
    Scoped entirely to [data-skin="arc-hud"] so it takes effect only when the
-   Arc HUD skin is selected. Supports both Light and Dark themes.
+   Arc HUD skin is active. Supports both Dark (neon Iron-Man reactor) and
+   Light (cool tactical technical contrast) modes.
    ────────────────────────────────────────────────────────────────────────── */
 
-/* ── Light Variant (legible, cooler technical contrast on bright surfaces) */
+/* ── Light Variant (Tactical Technical Contrast) ────────────────────────── */
 :root[data-skin="arc-hud"] {
-  --accent: #008b9e;
-  --accent-hover: #007282;
-  --accent-text: #007282;
-  --accent-contrast: #ffffff;
-  --accent-bg: rgba(217, 119, 6, 0.10);
-  --accent-bg-strong: rgba(217, 119, 6, 0.20);
-  --accent-rgb: 0, 139, 158;
-  --accent2: #d97706;
-  --accent3: #0284c7;
-  --link: #008b9e;
+  --accent: #008b9e !important;
+  --accent-hover: #007282 !important;
+  --accent-text: #007282 !important;
+  --accent-contrast: #ffffff !important;
+  --accent-bg: rgba(217, 119, 6, 0.10) !important;
+  --accent-bg-strong: rgba(217, 119, 6, 0.20) !important;
+  --accent-rgb: 0, 139, 158 !important;
+  --accent2: #d97706 !important;
+  --accent3: #0284c7 !important;
+  --link: #008b9e !important;
 
   /* Arc HUD design tokens for Light mode */
-  --arc-hud-primary: #008b9e;
-  --arc-hud-secondary: #d97706;
-  --arc-hud-border: rgba(0, 139, 158, 0.40);
-  --arc-hud-border-hover: rgba(0, 139, 158, 0.85);
-  --arc-hud-glow: rgba(0, 139, 158, 0.18);
-  --arc-hud-glow-strong: rgba(0, 139, 158, 0.40);
-  --arc-hud-bracket: #d97706;
-  --arc-hud-bracket-glow: rgba(217, 119, 6, 0.35);
-  --arc-hud-chip-bg: rgba(0, 139, 158, 0.05);
-  --arc-hud-chip-bg-hover: rgba(0, 139, 158, 0.12);
-  --arc-hud-scanline: rgba(0, 139, 158, 0.025);
-  --arc-hud-box-bg: rgba(254, 252, 247, 0.96);
-  --arc-hud-send-gradient: radial-gradient(circle at center, #ffffff 0%, #00a4ba 38%, #00788a 72%, #004d59 100%);
-  --arc-hud-send-text: #ffffff;
+  --arc-hud-primary: #008b9e !important;
+  --arc-hud-secondary: #d97706 !important;
+  --arc-hud-border: rgba(0, 139, 158, 0.40) !important;
+  --arc-hud-border-hover: rgba(0, 139, 158, 0.85) !important;
+  --arc-hud-glow: rgba(0, 139, 158, 0.18) !important;
+  --arc-hud-glow-strong: rgba(0, 139, 158, 0.40) !important;
+  --arc-hud-bracket: #d97706 !important;
+  --arc-hud-bracket-glow: rgba(217, 119, 6, 0.35) !important;
+  --arc-hud-chip-bg: rgba(0, 139, 158, 0.05) !important;
+  --arc-hud-chip-bg-hover: rgba(0, 139, 158, 0.12) !important;
+  --arc-hud-scanline: rgba(0, 139, 158, 0.025) !important;
+  --arc-hud-panel-bg: rgba(245, 248, 252, 0.88) !important;
+  --arc-hud-box-bg: rgba(254, 252, 247, 0.94) !important;
+  --arc-hud-send-gradient: radial-gradient(circle at center, #ffffff 0%, #00a4ba 38%, #00788a 72%, #004d59 100%) !important;
+  --arc-hud-send-text: #ffffff !important;
+  --arc-hud-radar-scope: radial-gradient(circle, #e6f4f8 0%, #d4eaf0 100%) !important;
 }
 
-/* ── Dark Variant (vivid Iron-Man / sci-fi neon reactor aesthetic) ─────── */
+/* ── Dark Variant (Vivid Neon Arc Reactor & Sci-Fi HUD) ─────────────────── */
 :root.dark[data-skin="arc-hud"] {
-  --accent: #00f0ff;
-  --accent-hover: #38f5ff;
-  --accent-text: #00f0ff;
-  --accent-contrast: #030712;
-  --accent-bg: rgba(255, 183, 0, 0.10);
-  --accent-bg-strong: rgba(255, 183, 0, 0.20);
-  --accent-rgb: 0, 240, 255;
-  --accent2: #ffb700;
-  --accent3: #00d4e0;
-  --link: #00f0ff;
+  --accent: #00f0ff !important;
+  --accent-hover: #38f5ff !important;
+  --accent-text: #00f0ff !important;
+  --accent-contrast: #030712 !important;
+  --accent-bg: rgba(255, 183, 0, 0.10) !important;
+  --accent-bg-strong: rgba(255, 183, 0, 0.20) !important;
+  --accent-rgb: 0, 240, 255 !important;
+  --accent2: #ffb700 !important;
+  --accent3: #00d4e0 !important;
+  --link: #00f0ff !important;
 
   /* Arc HUD design tokens for Dark mode */
-  --arc-hud-primary: #00f0ff;
-  --arc-hud-secondary: #ffb700;
-  --arc-hud-border: rgba(0, 240, 255, 0.45);
-  --arc-hud-border-hover: rgba(0, 240, 255, 0.90);
-  --arc-hud-glow: rgba(0, 240, 255, 0.22);
-  --arc-hud-glow-strong: rgba(0, 240, 255, 0.55);
-  --arc-hud-bracket: #ffb700;
-  --arc-hud-bracket-glow: rgba(255, 183, 0, 0.55);
-  --arc-hud-chip-bg: rgba(0, 240, 255, 0.04);
-  --arc-hud-chip-bg-hover: rgba(0, 240, 255, 0.12);
-  --arc-hud-scanline: rgba(0, 240, 255, 0.035);
-  --arc-hud-box-bg: rgba(13, 13, 26, 0.92);
-  --arc-hud-send-gradient: radial-gradient(circle at center, #ffffff 0%, #00f0ff 38%, #008899 74%, #00363d 100%);
-  --arc-hud-send-text: #030712;
+  --arc-hud-primary: #00f0ff !important;
+  --arc-hud-secondary: #ffb700 !important;
+  --arc-hud-border: rgba(0, 240, 255, 0.45) !important;
+  --arc-hud-border-hover: rgba(0, 240, 255, 0.90) !important;
+  --arc-hud-glow: rgba(0, 240, 255, 0.22) !important;
+  --arc-hud-glow-strong: rgba(0, 240, 255, 0.55) !important;
+  --arc-hud-bracket: #ffb700 !important;
+  --arc-hud-bracket-glow: rgba(255, 183, 0, 0.55) !important;
+  --arc-hud-chip-bg: rgba(0, 240, 255, 0.04) !important;
+  --arc-hud-chip-bg-hover: rgba(0, 240, 255, 0.12) !important;
+  --arc-hud-scanline: rgba(0, 240, 255, 0.035) !important;
+  --arc-hud-panel-bg: rgba(8, 14, 26, 0.86) !important;
+  --arc-hud-box-bg: rgba(10, 16, 28, 0.92) !important;
+  --arc-hud-send-gradient: radial-gradient(circle at center, #ffffff 0%, #00f0ff 38%, #008899 74%, #00363d 100%) !important;
+  --arc-hud-send-text: #030712 !important;
+  --arc-hud-radar-scope: radial-gradient(circle, #071520 0%, #030a10 100%) !important;
 }
 
-/* ── HUD Typography on Scoped Selectors ─────────────────────────────────── */
-:root[data-skin="arc-hud"] .composer-footer {
-  font-family: var(--font-mono);
-  letter-spacing: 0.02em;
+/* ── Hide Sidebar & Translucent Main Workspace ──────────────────────────── */
+:root[data-skin="arc-hud"] .sidebar,
+:root[data-skin="arc-hud"] #sidebarResize {
+  display: none !important;
 }
 
-:root[data-skin="arc-hud"] .composer-profile-chip,
-:root[data-skin="arc-hud"] .composer-workspace-chip,
-:root[data-skin="arc-hud"] .composer-model-chip,
-:root[data-skin="arc-hud"] .composer-reasoning-chip,
-:root[data-skin="arc-hud"] .composer-toolsets-chip,
-:root[data-skin="arc-hud"] .provider-quota-chip,
-:root[data-skin="arc-hud"] .composer-status {
-  font-family: var(--font-mono);
-  font-size: 11px;
+:root[data-skin="arc-hud"] .rail {
+  background: rgba(8, 12, 22, 0.75) !important;
+  border-right: 1px solid var(--arc-hud-border) !important;
+  backdrop-filter: blur(8px) !important;
+  z-index: 25 !important;
 }
 
-/* ── Composer Box HUD Container & Scanline Overlay ──────────────────────── */
-:root[data-skin="arc-hud"] .composer-box {
-  position: relative;
+:root[data-skin="arc-hud"] .layout,
+:root[data-skin="arc-hud"] .main,
+:root[data-skin="arc-hud"] #mainChat,
+:root[data-skin="arc-hud"] .messages-shell,
+:root[data-skin="arc-hud"] #messages {
+  background: transparent !important;
+  position: relative !important;
+}
+
+:root[data-skin="arc-hud"] .main {
+  width: 100% !important;
+  margin-left: 0 !important;
+}
+
+:root[data-skin="arc-hud"] .messages {
+  z-index: 10 !important;
+  padding-bottom: 120px !important;
+}
+
+/* Translucent Glass Messages so the Arc Reactor shines through */
+:root[data-skin="arc-hud"] .msg {
+  background: rgba(8, 14, 26, 0.75) !important;
+  border: 1px solid rgba(0, 240, 255, 0.22) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.02) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+:root[data-skin="arc-hud"] .msg.user {
+  border-color: rgba(255, 183, 0, 0.35) !important;
+  background: rgba(22, 16, 10, 0.78) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 183, 0, 0.02) !important;
+}
+
+:root[data-skin="arc-hud"] .msg-body {
+  font-family: var(--font-conversation);
+}
+
+/* ── HUD Fullscreen Overlay Container ───────────────────────────────────── */
+#arc-hud-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
   overflow: hidden;
-  border-color: var(--arc-hud-border);
-  box-shadow: 0 0 12px var(--arc-hud-glow), inset 0 0 10px rgba(0, 240, 255, 0.02);
+  font-family: var(--font-mono, monospace);
+  color: var(--arc-hud-primary);
+}
+
+/* Subtle background grid and vignette */
+.arc-hud-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.arc-hud-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 40%, rgba(2, 6, 12, 0.7) 100%);
+  pointer-events: none;
+}
+
+/* ── Central Arc Reactor Graphic ────────────────────────────────────────── */
+.arc-reactor-wrap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 560px;
+  height: 560px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.44;
+  filter: drop-shadow(0 0 24px var(--arc-hud-glow));
+}
+
+.arc-reactor-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Arc Reactor Rotational and Pulsing Keyframes */
+.arc-outer-ticks {
+  transform-origin: 280px 280px;
+  animation: arc-spin-cw 90s linear infinite;
+}
+
+.arc-turbine-ring {
+  transform-origin: 280px 280px;
+  animation: arc-spin-ccw 40s linear infinite;
+}
+
+.arc-inner-cage {
+  transform-origin: 280px 280px;
+  animation: arc-spin-cw 20s linear infinite;
+}
+
+.arc-core-pulse {
+  transform-origin: 280px 280px;
+  animation: arc-pulse-glow 2.8s ease-in-out infinite;
+}
+
+@keyframes arc-spin-cw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes arc-spin-ccw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes arc-pulse-glow {
+  0%, 100% {
+    transform: scale(0.98);
+    opacity: 0.85;
+    filter: drop-shadow(0 0 10px var(--arc-hud-primary));
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 1;
+    filter: drop-shadow(0 0 26px var(--arc-hud-primary)) drop-shadow(0 0 40px var(--arc-hud-secondary));
+  }
+}
+
+/* ── Screen Corner Framing Brackets ─────────────────────────────────────── */
+.arc-hud-corner-frame {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  pointer-events: none;
+}
+
+.arc-hud-corner-frame.top-left {
+  top: 8px;
+  left: 56px;
+  border-top: 2px solid var(--arc-hud-bracket);
+  border-left: 2px solid var(--arc-hud-bracket);
+  filter: drop-shadow(0 0 6px var(--arc-hud-bracket-glow));
+}
+
+.arc-hud-corner-frame.top-right {
+  top: 8px;
+  right: 8px;
+  border-top: 2px solid var(--arc-hud-bracket);
+  border-right: 2px solid var(--arc-hud-bracket);
+  filter: drop-shadow(0 0 6px var(--arc-hud-bracket-glow));
+}
+
+.arc-hud-corner-frame.bottom-left {
+  bottom: 8px;
+  left: 56px;
+  border-bottom: 2px solid var(--arc-hud-bracket);
+  border-left: 2px solid var(--arc-hud-bracket);
+  filter: drop-shadow(0 0 6px var(--arc-hud-bracket-glow));
+}
+
+.arc-hud-corner-frame.bottom-right {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 2px solid var(--arc-hud-bracket);
+  border-right: 2px solid var(--arc-hud-bracket);
+  filter: drop-shadow(0 0 6px var(--arc-hud-bracket-glow));
+}
+
+/* ── The 4 Corner Panels Common Styles ──────────────────────────────────── */
+.arc-hud-panel {
+  position: fixed;
+  pointer-events: auto;
+  z-index: 30;
+  background: var(--arc-hud-panel-bg);
+  border: 1px solid var(--arc-hud-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65), 0 0 16px var(--arc-hud-glow);
+  backdrop-filter: blur(12px);
+  border-radius: 6px;
+  overflow: hidden;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-:root[data-skin="arc-hud"] .composer-box:focus-within {
+.arc-hud-panel:hover {
   border-color: var(--arc-hud-border-hover);
-  box-shadow: 0 0 18px var(--arc-hud-glow-strong), inset 0 0 12px rgba(0, 240, 255, 0.05);
+  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.75), 0 0 22px var(--arc-hud-glow-strong);
 }
 
-/* Subtle animated scanline overlay: low opacity keeps text legible */
-:root[data-skin="arc-hud"] .composer-box::before {
+/* Corner bracket accents on panels */
+.arc-hud-panel::before {
   content: "";
   position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--arc-hud-bracket);
+  border-left: 2px solid var(--arc-hud-bracket);
+  pointer-events: none;
+}
+
+.arc-hud-panel::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid var(--arc-hud-bracket);
+  border-right: 2px solid var(--arc-hud-bracket);
+  pointer-events: none;
+}
+
+/* Panel Header */
+.hud-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(0, 240, 255, 0.05);
+  border-bottom: 1px solid var(--arc-hud-border);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  user-select: none;
+}
+
+.hud-header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hud-header-icon {
+  color: var(--arc-hud-secondary);
+}
+
+.hud-header-title {
+  color: var(--arc-hud-primary);
+  text-shadow: 0 0 6px var(--arc-hud-glow);
+}
+
+.hud-header-tag {
+  color: var(--arc-hud-secondary);
+  font-size: 9.5px;
+  opacity: 0.9;
+}
+
+.hud-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+.hud-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.hud-status-dot.standby {
+  background: #ffb700;
+  box-shadow: 0 0 8px #ffb700;
+}
+
+.hud-status-text {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--arc-hud-primary);
+}
+
+.hud-panel-content {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* ── Panel 1: Top-Left (Core Telemetry) ─────────────────────────────────── */
+.panel-top-left {
+  top: 16px;
+  left: 64px;
+  width: 320px;
+}
+
+.hud-telemetry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.hud-stat-cell {
+  background: rgba(0, 240, 255, 0.03);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 4px;
+  padding: 6px 8px;
+}
+
+.hud-stat-cell.hud-cell-wide {
+  grid-column: span 2;
+}
+
+.hud-stat-label {
+  font-size: 8.5px;
+  color: var(--arc-hud-secondary);
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+
+.hud-stat-value {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--arc-hud-primary);
+  text-shadow: 0 0 4px var(--arc-hud-glow);
+}
+
+.hud-stat-value.stream-active {
+  color: #22c55e;
+  text-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+}
+
+.hud-stat-sub {
+  font-size: 9.5px;
+  color: var(--text, #c9d1d9);
+  opacity: 0.85;
+  margin-top: 3px;
+}
+
+.hud-progress-bar {
+  margin-top: 6px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(0, 240, 255, 0.15);
+  overflow: hidden;
+}
+
+.hud-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--arc-hud-primary), var(--arc-hud-secondary));
+  box-shadow: 0 0 8px var(--arc-hud-primary);
+  transition: width 0.4s ease;
+}
+
+/* ── Panel 2: Top-Right (Tactical Radar) ────────────────────────────────── */
+.panel-top-right {
+  top: 16px;
+  right: 18px;
+  width: 340px;
+}
+
+.hud-coords {
+  font-size: 9px;
+  color: var(--arc-hud-secondary);
+  letter-spacing: 0.04em;
+}
+
+.hud-radar-layout {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.hud-radar-display {
+  flex-shrink: 0;
+}
+
+.radar-scope {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--arc-hud-radar-scope);
+  border: 1.5px solid var(--arc-hud-primary);
+  box-shadow: inset 0 0 16px rgba(0, 240, 255, 0.25), 0 0 10px var(--arc-hud-glow);
+  overflow: hidden;
+}
+
+/* Concentric rings */
+.radar-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  pointer-events: none;
+}
+
+.radar-ring.ring-1 { width: 34px; height: 34px; }
+.radar-ring.ring-2 { width: 68px; height: 68px; }
+.radar-ring.ring-3 { width: 102px; height: 102px; border-style: dashed; }
+
+.radar-axis-h {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0, 240, 255, 0.2);
+  pointer-events: none;
+}
+
+.radar-axis-v {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(0, 240, 255, 0.2);
+  pointer-events: none;
+}
+
+/* Radar Sweep Line & Gradient */
+.radar-sweep {
+  position: absolute;
   inset: 0;
-  border-radius: 16px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(0, 240, 255, 0.45) 0deg, rgba(0, 240, 255, 0.1) 40deg, transparent 90deg, transparent 360deg);
+  animation: radar-sweep-rotate 3.6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes radar-sweep-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-blips {
+  position: absolute;
+  inset: 0;
+}
+
+.radar-blip {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffb700;
+  box-shadow: 0 0 6px #ffb700;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.radar-blip.active {
+  background: #00f0ff;
+  box-shadow: 0 0 10px #00f0ff, 0 0 18px rgba(0, 240, 255, 0.8);
+  animation: radar-blip-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes radar-blip-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.6); opacity: 1; }
+}
+
+.hud-radar-info {
+  flex: 1;
+  min-width: 0;
+  font-size: 10px;
+}
+
+.radar-stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.radar-stat-lbl {
+  color: var(--arc-hud-secondary);
+  font-size: 8.5px;
+}
+
+.radar-stat-val {
+  color: var(--arc-hud-primary);
+  font-weight: 700;
+}
+
+.radar-stat-val.truncate {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.radar-target-list {
+  margin-top: 8px;
+  border-top: 1px solid rgba(0, 240, 255, 0.15);
+  padding-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.radar-target-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  color: var(--text, #c9d1d9);
+}
+
+.radar-target-item.empty {
+  color: var(--muted, #8b949e);
+  font-style: italic;
+}
+
+.target-id {
+  color: var(--arc-hud-secondary);
+  font-weight: 700;
+}
+
+.target-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.target-dist {
+  color: var(--arc-hud-primary);
+  opacity: 0.85;
+}
+
+/* ── Panel 3: Bottom-Right (Telemetry Matrix Log) ───────────────────────── */
+.panel-bottom-right {
+  bottom: 20px;
+  right: 18px;
+  width: 360px;
+  height: 210px;
+}
+
+.hud-rec-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444;
+  animation: hud-rec-blink 1.2s ease-in-out infinite;
+}
+
+@keyframes hud-rec-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.hud-matrix-content {
+  height: calc(100% - 32px);
+  padding: 6px 8px;
+}
+
+.hud-log-stream {
+  height: 100%;
+  overflow-y: auto;
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  line-height: 1.45;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--arc-hud-border) transparent;
+}
+
+.hud-log-stream::-webkit-scrollbar {
+  width: 4px;
+}
+
+.hud-log-stream::-webkit-scrollbar-thumb {
+  background: var(--arc-hud-border);
+  border-radius: 2px;
+}
+
+.hud-log-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  word-break: break-all;
+}
+
+.hud-log-time {
+  color: rgba(0, 240, 255, 0.45);
+  font-size: 9.5px;
+  white-space: nowrap;
+}
+
+.hud-log-tag {
+  color: var(--arc-hud-secondary);
+  font-size: 9.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hud-log-tag.tag-transmit,
+.hud-log-tag.tag-fire {
+  color: #00f0ff;
+  text-shadow: 0 0 4px #00f0ff;
+}
+
+.hud-log-tag.tag-reactor {
+  color: #ffb700;
+  text-shadow: 0 0 4px #ffb700;
+}
+
+.hud-log-msg {
+  color: var(--text, #c9d1d9);
+  flex: 1;
+}
+
+/* ── Panel 4: Bottom-Left (Functional Subsystem Controls) ───────────────── */
+.panel-bottom-left {
+  bottom: 20px;
+  left: 64px;
+  width: 380px;
+  max-width: calc(50vw - 80px);
+}
+
+.hud-controls-mount {
+  padding: 8px 10px;
+}
+
+/* Relocated .composer-left layout inside HUD panel */
+.hud-controls-mount .composer-left {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: 100% !important;
+}
+
+.hud-controls-mount .composer-divider {
+  display: none !important;
+}
+
+/* ── Composer Box HUD Container & Scanline Overlay ──────────────────────── */
+:root[data-skin="arc-hud"] .composer-wrap {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 580px !important;
+  max-width: calc(100vw - 820px) !important;
+  z-index: 25 !important;
+  margin: 0 !important;
+}
+
+:root[data-skin="arc-hud"] .composer-box {
+  position: relative !important;
+  overflow: hidden !important;
+  background: var(--arc-hud-box-bg) !important;
+  border-color: var(--arc-hud-border) !important;
+  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.65), 0 0 16px var(--arc-hud-glow) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  border-radius: 12px !important;
+}
+
+:root[data-skin="arc-hud"] .composer-box:focus-within {
+  border-color: var(--arc-hud-border-hover) !important;
+  box-shadow: 0 6px 36px rgba(0, 0, 0, 0.75), 0 0 24px var(--arc-hud-glow-strong) !important;
+}
+
+:root[data-skin="arc-hud"] textarea#msg {
+  background: transparent !important;
+  color: var(--text) !important;
+  caret-color: var(--arc-hud-primary) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 13.5px !important;
+  line-height: 1.5 !important;
+}
+
+:root[data-skin="arc-hud"] .composer-footer {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  padding: 6px 10px !important;
+  font-family: var(--font-mono) !important;
+}
+
+:root[data-skin="arc-hud"] .composer-right {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Subtle animated scanline overlay */
+:root[data-skin="arc-hud"] .composer-box::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 12px !important;
   background: repeating-linear-gradient(
     0deg,
     transparent 0px,
     transparent 3px,
     var(--arc-hud-scanline) 3px,
     var(--arc-hud-scanline) 4px
-  );
-  background-size: 100% 8px;
-  pointer-events: none;
-  z-index: 1;
-  animation: arc-hud-scanlines 10s linear infinite;
+  ) !important;
+  background-size: 100% 8px !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+  animation: arc-hud-scanlines 10s linear infinite !important;
 }
 
 @keyframes arc-hud-scanlines {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 0 64px;
-  }
+  from { background-position: 0 0 !important; }
+  to { background-position: 0 64px !important; }
 }
 
-/* Keep interactive content above scanline layer */
 :root[data-skin="arc-hud"] textarea#msg,
 :root[data-skin="arc-hud"] .composer-footer,
 :root[data-skin="arc-hud"] .attach-tray,
 :root[data-skin="arc-hud"] .cmd-dropdown {
-  position: relative;
-  z-index: 2;
+  position: relative !important;
+  z-index: 2 !important;
 }
 
-/* ── Composer Footer Divider & Icon Controls ────────────────────────────── */
-:root[data-skin="arc-hud"] .composer-divider {
-  background: var(--arc-hud-border);
-  box-shadow: 0 0 4px var(--arc-hud-glow);
-}
-
-:root[data-skin="arc-hud"] .composer-left .icon-btn {
-  border-radius: 4px;
-  border: 1px solid transparent;
-  transition: all 0.18s ease;
-}
-
-:root[data-skin="arc-hud"] .composer-left .icon-btn:hover {
-  border-color: var(--arc-hud-border);
-  background: var(--arc-hud-chip-bg-hover);
-  color: var(--arc-hud-primary);
-  box-shadow: 0 0 8px var(--arc-hud-glow);
-}
-
-/* ── Composer Footer Chips: Hairline Borders & Corner-Bracket Accents ───── */
-/* Target all composer footer chips */
+/* ── Composer Chips & Buttons HUD Accents ────────────────────────────────── */
 :root[data-skin="arc-hud"] .composer-profile-chip,
 :root[data-skin="arc-hud"] .composer-model-chip,
 :root[data-skin="arc-hud"] .composer-reasoning-chip,
 :root[data-skin="arc-hud"] .composer-toolsets-chip,
 :root[data-skin="arc-hud"] .provider-quota-chip,
-:root[data-skin="arc-hud"] .composer-workspace-group {
-  position: relative;
-  border-radius: 4px;
-  border: 1px solid var(--arc-hud-border);
-  background: var(--arc-hud-chip-bg);
-  box-shadow: 0 0 6px var(--arc-hud-glow);
-  color: var(--text);
-  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+:root[data-skin="arc-hud"] .composer-workspace-group,
+:root[data-skin="arc-hud"] .yolo-pill {
+  position: relative !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--arc-hud-border) !important;
+  background: var(--arc-hud-chip-bg) !important;
+  box-shadow: 0 0 6px var(--arc-hud-glow) !important;
+  color: var(--text) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+  transition: all 0.18s ease !important;
 }
 
-/* Workspace group internal buttons */
 :root[data-skin="arc-hud"] .composer-workspace-files-btn {
-  border-radius: 3px 0 0 3px;
-  border-right: 1px solid var(--arc-hud-border);
-  transition: all 0.18s ease;
+  border-radius: 3px 0 0 3px !important;
+  border-right: 1px solid var(--arc-hud-border) !important;
 }
 
 :root[data-skin="arc-hud"] .composer-workspace-chip {
-  border-radius: 0 3px 3px 0;
-  transition: all 0.18s ease;
+  border-radius: 0 3px 3px 0 !important;
 }
 
-:root[data-skin="arc-hud"] .composer-workspace-group:hover .composer-workspace-files-btn,
-:root[data-skin="arc-hud"] .composer-workspace-group:hover .composer-workspace-chip {
-  color: var(--arc-hud-primary);
+:root[data-skin="arc-hud"] .composer-left .icon-btn {
+  border-radius: 4px !important;
+  border: 1px solid transparent !important;
+  transition: all 0.18s ease !important;
 }
 
-/* Corner-bracket accents: small CSS-drawn angle brackets on corners */
+:root[data-skin="arc-hud"] .composer-left .icon-btn:hover {
+  border-color: var(--arc-hud-border) !important;
+  background: var(--arc-hud-chip-bg-hover) !important;
+  color: var(--arc-hud-primary) !important;
+  box-shadow: 0 0 8px var(--arc-hud-glow) !important;
+}
+
+/* Corner bracket accents on chips */
 :root[data-skin="arc-hud"] .composer-profile-chip::before,
 :root[data-skin="arc-hud"] .composer-model-chip::before,
 :root[data-skin="arc-hud"] .composer-reasoning-chip::before,
 :root[data-skin="arc-hud"] .composer-toolsets-chip::before,
 :root[data-skin="arc-hud"] .provider-quota-chip::before,
 :root[data-skin="arc-hud"] .composer-workspace-group::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: 5px;
-  height: 5px;
-  border-top: 1.5px solid var(--arc-hud-bracket);
-  border-left: 1.5px solid var(--arc-hud-bracket);
-  pointer-events: none;
-  transition: border-color 0.18s ease, filter 0.18s ease;
+  content: "" !important;
+  position: absolute !important;
+  top: -2px !important;
+  left: -2px !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-top: 1.5px solid var(--arc-hud-bracket) !important;
+  border-left: 1.5px solid var(--arc-hud-bracket) !important;
+  pointer-events: none !important;
 }
 
 :root[data-skin="arc-hud"] .composer-profile-chip::after,
@@ -209,214 +863,191 @@
 :root[data-skin="arc-hud"] .composer-toolsets-chip::after,
 :root[data-skin="arc-hud"] .provider-quota-chip::after,
 :root[data-skin="arc-hud"] .composer-workspace-group::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 5px;
-  height: 5px;
-  border-bottom: 1.5px solid var(--arc-hud-bracket);
-  border-right: 1.5px solid var(--arc-hud-bracket);
-  pointer-events: none;
-  transition: border-color 0.18s ease, filter 0.18s ease;
+  content: "" !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  right: -2px !important;
+  width: 5px !important;
+  height: 5px !important;
+  border-bottom: 1.5px solid var(--arc-hud-bracket) !important;
+  border-right: 1.5px solid var(--arc-hud-bracket) !important;
+  pointer-events: none !important;
 }
 
-/* Hover and active states for chips */
 :root[data-skin="arc-hud"] .composer-profile-chip:hover,
-:root[data-skin="arc-hud"] .composer-profile-chip.active,
 :root[data-skin="arc-hud"] .composer-model-chip:hover,
-:root[data-skin="arc-hud"] .composer-model-chip.active,
 :root[data-skin="arc-hud"] .composer-reasoning-chip:hover,
-:root[data-skin="arc-hud"] .composer-reasoning-chip.active,
 :root[data-skin="arc-hud"] .composer-toolsets-chip:hover,
-:root[data-skin="arc-hud"] .composer-toolsets-chip.active,
 :root[data-skin="arc-hud"] .provider-quota-chip:hover,
 :root[data-skin="arc-hud"] .composer-workspace-group:hover {
-  border-color: var(--arc-hud-border-hover);
-  background: var(--arc-hud-chip-bg-hover);
-  box-shadow: 0 0 10px var(--arc-hud-glow-strong), inset 0 0 6px var(--arc-hud-glow);
-  color: var(--arc-hud-primary);
-}
-
-:root[data-skin="arc-hud"] .composer-profile-chip:hover::before,
-:root[data-skin="arc-hud"] .composer-profile-chip:hover::after,
-:root[data-skin="arc-hud"] .composer-model-chip:hover::before,
-:root[data-skin="arc-hud"] .composer-model-chip:hover::after,
-:root[data-skin="arc-hud"] .composer-reasoning-chip:hover::before,
-:root[data-skin="arc-hud"] .composer-reasoning-chip:hover::after,
-:root[data-skin="arc-hud"] .composer-toolsets-chip:hover::before,
-:root[data-skin="arc-hud"] .composer-toolsets-chip:hover::after,
-:root[data-skin="arc-hud"] .provider-quota-chip:hover::before,
-:root[data-skin="arc-hud"] .provider-quota-chip:hover::after,
-:root[data-skin="arc-hud"] .composer-workspace-group:hover::before,
-:root[data-skin="arc-hud"] .composer-workspace-group:hover::after {
-  filter: drop-shadow(0 0 4px var(--arc-hud-bracket-glow));
+  border-color: var(--arc-hud-border-hover) !important;
+  background: var(--arc-hud-chip-bg-hover) !important;
+  box-shadow: 0 0 10px var(--arc-hud-glow-strong), inset 0 0 6px var(--arc-hud-glow) !important;
+  color: var(--arc-hud-primary) !important;
 }
 
 /* ── Context Ring HUD Glow ─────────────────────────────────────────────── */
 :root[data-skin="arc-hud"] .ctx-indicator {
-  transition: transform 0.18s ease, filter 0.18s ease;
+  transition: transform 0.18s ease, filter 0.18s ease !important;
 }
 
 :root[data-skin="arc-hud"] .ctx-ring {
-  filter: drop-shadow(0 0 4px var(--arc-hud-primary)) drop-shadow(0 0 8px var(--arc-hud-glow));
-  transition: filter 0.18s ease;
-}
-
-:root[data-skin="arc-hud"] .ctx-indicator:hover .ctx-ring,
-:root[data-skin="arc-hud"] .ctx-indicator:focus-visible .ctx-ring {
-  filter: drop-shadow(0 0 6px var(--arc-hud-primary)) drop-shadow(0 0 14px var(--arc-hud-glow-strong));
+  filter: drop-shadow(0 0 4px var(--arc-hud-primary)) drop-shadow(0 0 8px var(--arc-hud-glow)) !important;
 }
 
 :root[data-skin="arc-hud"] .ctx-ring-track {
-  stroke: rgba(0, 240, 255, 0.16);
+  stroke: rgba(0, 240, 255, 0.16) !important;
 }
 
 :root[data-skin="arc-hud"] .ctx-ring-value {
-  stroke: var(--arc-hud-primary);
-  filter: drop-shadow(0 0 2px var(--arc-hud-primary));
+  stroke: var(--arc-hud-primary) !important;
+  filter: drop-shadow(0 0 2px var(--arc-hud-primary)) !important;
 }
 
 :root[data-skin="arc-hud"] .ctx-ring-center {
-  font-family: var(--font-mono);
-  font-size: 8.5px;
-  font-weight: 700;
-  color: var(--arc-hud-primary);
-  text-shadow: 0 0 4px var(--arc-hud-glow-strong);
-  background: transparent;
+  font-family: var(--font-mono) !important;
+  font-size: 8.5px !important;
+  font-weight: 700 !important;
+  color: var(--arc-hud-primary) !important;
+  text-shadow: 0 0 4px var(--arc-hud-glow-strong) !important;
 }
 
 /* ── Arc Reactor Send Button ────────────────────────────────────────────── */
 :root[data-skin="arc-hud"] .send-btn {
-  position: relative;
-  background: var(--arc-hud-send-gradient);
-  border: 1.5px solid var(--arc-hud-primary);
-  color: var(--arc-hud-send-text);
-  box-shadow: 0 0 8px var(--arc-hud-glow-strong), inset 0 0 6px rgba(255, 255, 255, 0.85);
-  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  position: relative !important;
+  background: var(--arc-hud-send-gradient) !important;
+  border: 1.5px solid var(--arc-hud-primary) !important;
+  color: var(--arc-hud-send-text) !important;
+  box-shadow: 0 0 8px var(--arc-hud-glow-strong), inset 0 0 6px rgba(255, 255, 255, 0.85) !important;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease !important;
 }
 
 :root[data-skin="arc-hud"] .send-btn svg {
-  position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6));
+  position: relative !important;
+  z-index: 2 !important;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.6)) !important;
 }
 
-/* Arc reactor pulse glow on hover and focus-visible */
 :root[data-skin="arc-hud"] .send-btn:not(:disabled):hover,
 :root[data-skin="arc-hud"] .send-btn:not(:disabled):focus-visible {
-  outline: none;
-  animation: arc-reactor-pulse 1.8s ease-in-out infinite;
+  outline: none !important;
+  animation: arc-reactor-pulse 1.8s ease-in-out infinite !important;
 }
 
 @keyframes arc-reactor-pulse {
   0% {
-    box-shadow:
-      0 0 8px var(--arc-hud-primary),
-      0 0 16px var(--arc-hud-glow-strong),
-      inset 0 0 6px #ffffff;
-    filter: brightness(1.05);
+    box-shadow: 0 0 8px var(--arc-hud-primary), 0 0 16px var(--arc-hud-glow-strong), inset 0 0 6px #ffffff !important;
+    filter: brightness(1.05) !important;
   }
   50% {
-    box-shadow:
-      0 0 14px var(--arc-hud-primary),
-      0 0 26px var(--arc-hud-glow-strong),
-      0 0 38px var(--arc-hud-glow),
-      inset 0 0 10px #ffffff;
-    filter: brightness(1.22);
+    box-shadow: 0 0 14px var(--arc-hud-primary), 0 0 26px var(--arc-hud-glow-strong), 0 0 38px var(--arc-hud-glow), inset 0 0 10px #ffffff !important;
+    filter: brightness(1.22) !important;
   }
   100% {
-    box-shadow:
-      0 0 8px var(--arc-hud-primary),
-      0 0 16px var(--arc-hud-glow-strong),
-      inset 0 0 6px #ffffff;
-    filter: brightness(1.05);
+    box-shadow: 0 0 8px var(--arc-hud-primary), 0 0 16px var(--arc-hud-glow-strong), inset 0 0 6px #ffffff !important;
+    filter: brightness(1.05) !important;
   }
 }
 
-/* Send firing burst pulse triggered on message submission */
 :root[data-skin="arc-hud"] .send-btn.arc-hud-pulse {
-  animation: arc-reactor-fire 0.45s ease-out;
+  animation: arc-reactor-fire 0.45s ease-out !important;
 }
 
 @keyframes arc-reactor-fire {
   0% {
-    box-shadow: 0 0 0 0 var(--arc-hud-primary), inset 0 0 12px #ffffff;
-    transform: scale(0.96);
+    box-shadow: 0 0 0 0 var(--arc-hud-primary), inset 0 0 12px #ffffff !important;
+    transform: scale(0.96) !important;
   }
   50% {
-    box-shadow: 0 0 24px 8px var(--arc-hud-primary), 0 0 40px 16px var(--arc-hud-secondary), inset 0 0 16px #ffffff;
-    transform: scale(1.08);
+    box-shadow: 0 0 24px 8px var(--arc-hud-primary), 0 0 40px 16px var(--arc-hud-secondary), inset 0 0 16px #ffffff !important;
+    transform: scale(1.08) !important;
   }
   100% {
-    box-shadow: 0 0 8px var(--arc-hud-glow-strong), inset 0 0 6px rgba(255, 255, 255, 0.85);
-    transform: scale(1);
+    box-shadow: 0 0 8px var(--arc-hud-glow-strong), inset 0 0 6px rgba(255, 255, 255, 0.85) !important;
+    transform: scale(1) !important;
   }
 }
 
-/* Disabled send button posture */
 :root[data-skin="arc-hud"] .send-btn:disabled {
-  opacity: 0.35;
-  filter: grayscale(0.6);
-  box-shadow: none;
-  border-color: rgba(255, 255, 255, 0.2);
-  animation: none;
+  opacity: 0.35 !important;
+  filter: grayscale(0.6) !important;
+  box-shadow: none !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  animation: none !important;
 }
 
-/* Active stop / interrupt button styling */
-:root[data-skin="arc-hud"] .send-btn.stop,
-:root[data-skin="arc-hud"] .send-btn.interrupt {
-  background: radial-gradient(circle at center, #ffffff 0%, var(--error, #ef4444) 40%, #991b1b 100%);
-  border-color: var(--error, #ef4444);
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.6), inset 0 0 6px #ffffff;
+/* ── Responsive Adaptations ─────────────────────────────────────────────── */
+@media (max-width: 1280px) {
+  :root[data-skin="arc-hud"] .composer-wrap {
+    max-width: calc(100vw - 740px) !important;
+  }
+  .panel-top-left { width: 280px; }
+  .panel-top-right { width: 300px; }
+  .panel-bottom-left { width: 320px; }
+  .panel-bottom-right { width: 320px; }
 }
 
-/* Steer button styling */
-:root[data-skin="arc-hud"] .send-btn.steer {
-  background: radial-gradient(circle at center, #ffffff 0%, #8b5cf6 40%, #5b21b6 100%);
-  border-color: #8b5cf6;
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.6), inset 0 0 6px #ffffff;
+@media (max-width: 1024px) {
+  :root[data-skin="arc-hud"] .composer-wrap {
+    max-width: calc(100vw - 120px) !important;
+    width: 600px !important;
+  }
+  .panel-top-right,
+  .panel-bottom-right {
+    display: none !important;
+  }
+  .panel-top-left {
+    width: 300px;
+  }
+  .panel-bottom-left {
+    width: 320px;
+  }
+  .arc-reactor-wrap {
+    width: 440px;
+    height: 440px;
+    opacity: 0.32;
+  }
 }
 
-/* ── Mobile and Responsive Support ──────────────────────────────────────── */
-:root[data-skin="arc-hud"] .composer-mobile-config-btn {
-  border-radius: 4px;
-  border: 1px solid var(--arc-hud-border);
-  background: var(--arc-hud-chip-bg);
-  box-shadow: 0 0 6px var(--arc-hud-glow);
+@media (max-width: 768px) {
+  .arc-hud-corner-frame.top-left,
+  .arc-hud-corner-frame.bottom-left {
+    left: 8px;
+  }
+  .panel-top-left {
+    left: 12px;
+    top: 10px;
+    width: calc(100vw - 24px);
+  }
+  .panel-bottom-left {
+    left: 12px;
+    bottom: 90px;
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+  }
+  :root[data-skin="arc-hud"] .composer-wrap {
+    left: 12px !important;
+    transform: none !important;
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+  }
+  .arc-reactor-wrap {
+    width: 320px;
+    height: 320px;
+    opacity: 0.25;
+  }
 }
 
-:root[data-skin="arc-hud"] #composerMobileCtxRing {
-  filter: drop-shadow(0 0 4px var(--arc-hud-primary));
-}
-
-:root[data-skin="arc-hud"] .composer-mobile-config-panel {
-  border-color: var(--arc-hud-border);
-  box-shadow: 0 -6px 28px rgba(0, 0, 0, 0.5), 0 0 12px var(--arc-hud-glow);
-}
-
-:root[data-skin="arc-hud"] .composer-mobile-config-action {
-  border-radius: 4px;
-  border: 1px solid var(--arc-hud-border);
-  font-family: var(--font-mono);
-}
-
-/* ── Accessibility: Prefers Reduced Motion ──────────────────────────────── */
+/* ── Accessibility: Reduced Motion ──────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  :root[data-skin="arc-hud"] .composer-box::before {
-    animation: none;
-  }
-
-  :root[data-skin="arc-hud"] .send-btn:not(:disabled):hover,
-  :root[data-skin="arc-hud"] .send-btn:not(:disabled):focus-visible {
-    animation: none;
-    box-shadow:
-      0 0 12px var(--arc-hud-primary),
-      0 0 20px var(--arc-hud-glow-strong),
-      inset 0 0 8px #ffffff;
-  }
-
-  :root[data-skin="arc-hud"] .send-btn.arc-hud-pulse {
-    animation: none;
+  .arc-outer-ticks,
+  .arc-turbine-ring,
+  .arc-inner-cage,
+  .arc-core-pulse,
+  .radar-sweep,
+  .radar-blip.active,
+  :root[data-skin="arc-hud"] .composer-box::before,
+  :root[data-skin="arc-hud"] .send-btn:not(:disabled):hover {
+    animation: none !important;
   }
 }

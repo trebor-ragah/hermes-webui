@@ -115,7 +115,8 @@ RUN groupadd -g 1024 hermeswebui \
     && chmod 0755 /home/hermeswebui \
     && chmod 1777 /app /uv_cache /workspace
 
-COPY --chmod=555 docker_init.bash /hermeswebui_init.bash
+COPY docker_init.bash /hermeswebui_init.bash
+RUN chmod 555 /hermeswebui_init.bash
 
 RUN touch /.within_container
 

@@ -1,0 +1,48 @@
+# Isolated Arc HUD sandbox — completely separate from your live WebUI.
+#
+# - New port (8790, not 8787)
+# - New, empty Hermes home + workspace (does NOT touch /opt/data/webui or your
+#   real ~/.hermes) — it will run its own first-run onboarding
+# - Extension mounted read-only from extensions-src/arc-hud/ so you can toggle
+#   it on/off from Settings -> Appearance / Settings -> Extensions like any
+#   other extension, without ever touching your production install
+#
+# Usage:
+#   docker compose -f docker-compose.arc-hud.yml up -d --build
+#   open http://localhost:8790
+#
+# Stop / remove:
+#   docker compose -f docker-compose.arc-hud.yml down
+#
+# To point it at your REAL Hermes agent config instead of a fresh isolated
+# one, change the two volume lines under `hermes-home`/`workspace` to your
+# real paths — but the whole point of this file is to NOT do that until
+# you've seen the skin working here first.
+
+services:
+  hermes-webui-arc-hud:
+    build: .
+    container_name: hermes-webui-arc-hud
+    ports:
+      - "127.0.0.1:8790:8790"
+    volumes:
+      - arc-hud-hermes-home:/home/hermeswebui/.hermes
+      - arc-hud-workspace:/workspace
+      - ./extensions-src/arc-hud:/opt/arc-hud-extension:ro
+    environment:
+      - WANTED_UID=${UID:-1000}
+      - WANTED_GID=${GID:-1000}
+      - HERMES_WEBUI_HOST=0.0.0.0
+      - HERMES_WEBUI_PORT=8790
+      - HERMES_WEBUI_STATE_DIR=/home/hermeswebui/.hermes/webui
+      - HERMES_WEBUI_EXTENSION_DIR=/opt/arc-hud-extension
+      - HERMES_WEBUI_EXTENSION_MANIFEST=manifest.json
+      # No password set by default — this binds to 127.0.0.1 only (see ports
+      # above), so it's not reachable off this machine. Set
+      # HERMES_WEBUI_PASSWORD in a .env file if you widen the bind address.
+      - HERMES_WEBUI_PASSWORD=${HERMES_WEBUI_PASSWORD:-}
+    restart: unless-stopped
+
+volumes:
+  arc-hud-hermes-home:
+  arc-hud-workspace:
